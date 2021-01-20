@@ -3,18 +3,13 @@
 </template>
 
 <script>
-import {
-  defineComponent,
-  reactive,
-  toRefs,
-  onBeforeMount
-} from "@/vue-wrapper";
+import { defineComponent, reactive, toRefs, onBeforeMount } from '@/vue-wrapper'
 
 export default defineComponent({
   // eslint-disable-next-line no-unused-vars
   setup(prop, { attribute, slots, emit }) {
-    console.log("[LIFECYCLE] beforeCreate, created");
-    const state = reactive({});
+    console.log('[LIFECYCLE] beforeCreate, created')
+    const state = reactive({})
 
     /**
      * * computed----------------------------------------
@@ -24,28 +19,28 @@ export default defineComponent({
      * * life cycle----------------------------------------
      */
     onBeforeMount(() => {
-      console.log("[LIFECYCLE] beforeMount");
-    });
+      console.log('[LIFECYCLE] beforeMount')
+    })
 
     onMounted(() => {
-      console.log("[LIFECYCLE] mounted");
-    });
+      console.log('[LIFECYCLE] mounted')
+    })
 
     onBeforeUpdate(() => {
-      console.log("[LIFECYCLE] beforeUpdate");
-    });
+      console.log('[LIFECYCLE] beforeUpdate')
+    })
 
     onUpdated(() => {
-      console.log("[LIFECYCLE] updated");
-    });
+      console.log('[LIFECYCLE] updated')
+    })
 
     onBeforeUnmount(() => {
-      console.log("[LIFECYCLE] beforeDestroy");
-    });
+      console.log('[LIFECYCLE] beforeDestroy')
+    })
 
     onUnmounted(() => {
-      console.log("[LIFECYCLE] destroyed");
-    });
+      console.log('[LIFECYCLE] destroyed')
+    })
 
     /**
      * * method----------------------------------------
@@ -57,9 +52,9 @@ export default defineComponent({
 
     return {
       ...toRefs(state)
-    };
+    }
   }
-});
+})
 </script>
 
 <style lang="scss" scoped></style>

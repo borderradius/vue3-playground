@@ -46,45 +46,37 @@
 </template>
 
 <script>
-import {
-  reactive,
-  toRefs,
-  onMounted,
-  computed,
-  watch,
-  provide,
-  ref
-} from "vue";
+import { reactive, toRefs, onMounted, computed, watch, provide, ref } from 'vue'
 // import Child from "@/components/Child.vue";
 
 export default {
   // components: {
   //   Child
   // },
-  emits: ["sendParent"],
+  emits: ['sendParent'],
   setup() {
     const state = reactive({
       count: 0,
       obj: {
-        prop: "obj-prop"
+        prop: 'obj-prop'
       },
-      arr: ["arr"],
+      arr: ['arr'],
       sceneInfo: []
-    });
+    })
 
-    let yOffset = 0; // window.pageYOffset 값 넣은 변수
-    let prevScrollHeight = 0; // 현재 스크롤 위치(yOffset)보다 이전에 위치한 스크롤 섹션들의 스크롤 높이값의 합
-    let currentScene = 0; // 현재 활성화된(눈 앞에 보고있는) 씬(scroll-section)
+    let yOffset = 0 // window.pageYOffset 값 넣은 변수
+    let prevScrollHeight = 0 // 현재 스크롤 위치(yOffset)보다 이전에 위치한 스크롤 섹션들의 스크롤 높이값의 합
+    let currentScene = 0 // 현재 활성화된(눈 앞에 보고있는) 씬(scroll-section)
 
-    const location = ref("seoul");
-    provide("location", location);
+    const location = ref('seoul')
+    provide('location', location)
 
     // const cnt = ref(0);
 
     /**
      * * computed----------------------------------------
      */
-    const countIncreased = computed(() => state.count * 2);
+    const countIncreased = computed(() => state.count * 2)
 
     /**
      * * watch----------------------------------------
@@ -94,109 +86,109 @@ export default {
       // console.log(
       //   `카운터 바뀐거 watch로 확인, oldValue: ${oldValue.count}, newValue: ${newValue.count}`
       // );
-    });
+    })
 
     /**
      * * method----------------------------------------
      */
-    const increaseCount = () => state.count++;
+    const increaseCount = () => state.count++
     const addArray = () => {
-      state.arr = new Array(state.count);
-    };
+      state.arr = new Array(state.count)
+    }
     // scene 정보 기본설정
     const getSceneInfo = function() {
       state.sceneInfo = [
         {
-          type: "sticky",
+          type: 'sticky',
           heightNum: 5,
           scrollHeight: 0,
           objs: {
-            container: ""
+            container: ''
           }
         },
         {
-          type: "normal",
+          type: 'normal',
           heightNum: 5,
           scrollHeight: 0,
           objs: {
-            container: ""
+            container: ''
           }
         },
         {
-          type: "sticky",
+          type: 'sticky',
           heightNum: 5,
           scrollHeight: 0,
           objs: {
-            container: ""
+            container: ''
           }
         },
         {
-          type: "sticky",
+          type: 'sticky',
           heightNum: 5,
           scrollHeight: 0,
           objs: {
-            container: ""
+            container: ''
           }
         }
-      ];
-    };
-    getSceneInfo();
-    console.log(state.sceneInfo);
+      ]
+    }
+    getSceneInfo()
+    console.log(state.sceneInfo)
     // 컨테이너로 지정한 섹션들 높이값 설정
     const setLayout = () => {
       for (let i = 0; i < state.sceneInfo.length; i++) {
         state.sceneInfo[i].scrollHeight =
-          state.sceneInfo[i].heightNum * window.innerHeight;
+          state.sceneInfo[i].heightNum * window.innerHeight
         state.sceneInfo[
           i
-        ].objs.container.style.height = `${state.sceneInfo[i].scrollHeight}px`;
+        ].objs.container.style.height = `${state.sceneInfo[i].scrollHeight}px`
       }
-    };
+    }
     // 스크롤 시 동작하는 함수
     const scrollLoop = () => {
-      prevScrollHeight = 0;
+      prevScrollHeight = 0
       for (let i = 0; i < currentScene; i++) {
-        prevScrollHeight += state.sceneInfo[i].scrollHeight;
+        prevScrollHeight += state.sceneInfo[i].scrollHeight
       }
       if (
         yOffset >
         prevScrollHeight + state.sceneInfo[currentScene].scrollHeight
       ) {
-        currentScene++;
+        currentScene++
       }
       if (yOffset < prevScrollHeight) {
-        if (!currentScene) return;
-        currentScene--;
+        if (!currentScene) return
+        currentScene--
       }
 
-      document.body.setAttribute("id", `show-scene-${currentScene}`);
+      document.body.setAttribute('id', `show-scene-${currentScene}`)
 
-      console.log(currentScene);
-    };
+      console.log(currentScene)
+    }
 
     /**
      * * life cycle----------------------------------------
      */
     onMounted(() => {
-      console.warn("onMounted started");
+      console.warn('onMounted started')
 
       // section 가져와서 컨테이너로 설정
-      const sectionArr = document.getElementsByClassName("section");
+      const sectionArr = document.getElementsByClassName('section')
       state.sceneInfo.forEach((scene, i) => {
-        scene.objs.container = sectionArr[i];
-      });
+        scene.objs.container = sectionArr[i]
+      })
 
       // setLayout();
 
-      window.addEventListener("resize", setLayout);
-      window.addEventListener("scroll", () => {
-        yOffset = window.pageYOffset;
+      window.addEventListener('resize', setLayout)
+      window.addEventListener('scroll', () => {
+        yOffset = window.pageYOffset
         // console.log(yOffset);
-        scrollLoop();
-      });
-      window.addEventListener("load", setLayout);
-      window.addEventListener("resize", setLayout);
-    });
+        scrollLoop()
+      })
+      window.addEventListener('load', setLayout)
+      window.addEventListener('resize', setLayout)
+    })
     // onUpdated(() => // attrs, slots변경시 이 훅에서 작업.)
 
     return {
@@ -205,9 +197,9 @@ export default {
       increaseCount,
       addArray,
       location
-    };
+    }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped></style>

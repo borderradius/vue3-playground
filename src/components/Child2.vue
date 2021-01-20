@@ -3,13 +3,13 @@
 </template>
 
 <script>
-import { defineComponent, reactive, toRefs, inject } from "vue";
+import { defineComponent, reactive, toRefs, inject } from 'vue'
 
 export default defineComponent({
   // eslint-disable-next-line no-unused-vars
   setup(prop, { attribute, slots, emit }) {
-    const state = reactive({});
-    const injectValue = inject("location");
+    const state = reactive({})
+    const injectValue = inject('location')
     /**
      * * computed
      */
@@ -29,9 +29,9 @@ export default defineComponent({
     return {
       ...toRefs(state),
       injectValue
-    };
+    }
   }
-});
+})
 </script>
 
 <style lang="scss" scoped></style>

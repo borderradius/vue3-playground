@@ -8,12 +8,12 @@
 </template>
 
 <script>
-import { defineComponent, reactive, toRefs } from "vue";
+import { defineComponent, reactive, toRefs } from 'vue'
 
 export default defineComponent({
   // eslint-disable-next-line no-unused-vars
   setup(prop, { attribute, slots, emit }) {
-    const state = reactive({});
+    const state = reactive({})
 
     /**
      * * computed----------------------------------------
@@ -33,9 +33,9 @@ export default defineComponent({
 
     return {
       ...toRefs(state)
-    };
+    }
   }
-});
+})
 </script>
 
 <style lang="scss" scoped></style>

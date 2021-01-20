@@ -1,15 +1,15 @@
-import { createStore, createLogger } from "vuex";
-import cart from "./modules/cart";
+import { createStore, createLogger } from 'vuex'
+import cart from './modules/cart'
 
 export default createStore({
   modules: {
     cart
   },
-  strict: "debug",
+  strict: 'debug',
   plugins: [createLogger()],
   state() {
     return {
-      rootData: "rootData"
-    };
+      rootData: 'rootData'
+    }
   }
-});
+})

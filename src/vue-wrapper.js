@@ -7,4 +7,4 @@ export {
   computed,
   watch,
   getCurrentInstance
-} from "vue";
+} from 'vue'

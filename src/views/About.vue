@@ -13,32 +13,32 @@
 </template>
 
 <script>
-import { computed, defineComponent, reactive, toRefs } from "vue";
-import { useStore } from "vuex";
+import { computed, defineComponent, reactive, toRefs } from 'vue'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   // eslint-disable-next-line no-unused-vars
   setup(prop, { attribute, slots, emit }) {
     const state = reactive({
       lists: []
-    });
-    const store = useStore();
+    })
+    const store = useStore()
 
-    store.dispatch("cart/getProducts");
+    store.dispatch('cart/getProducts')
 
     /**
      * * computed
      */
     state.lists = computed(() => {
-      return store.getters["cart/cartProducts"];
-    });
+      return store.getters['cart/cartProducts']
+    })
 
     /**
      * * method
      */
     const changeLists = () => {
-      store.commit("cart/setProductLists", [{ name: "haha" }]);
-    };
+      store.commit('cart/setProductLists', [{ name: 'haha' }])
+    }
 
     /**
      * * watch
@@ -51,9 +51,9 @@ export default defineComponent({
     return {
       ...toRefs(state),
       changeLists
-    };
+    }
   }
-});
+})
 </script>
 
 <style lang="scss" scoped></style>

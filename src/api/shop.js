@@ -1,15 +1,15 @@
-import axios from "axios";
+import axios from 'axios'
 
 export default {
   async getProducts() {
     try {
       const {
         data: { contacts }
-      } = await axios.get("http://sample.bmaster.kro.kr/contacts");
+      } = await axios.get('http://sample.bmaster.kro.kr/contacts')
 
-      return contacts;
+      return contacts
     } catch (e) {
-      console.error(e);
+      console.error(e)
     }
   }
-};
+}

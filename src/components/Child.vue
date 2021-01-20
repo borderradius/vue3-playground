@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import { defineComponent, reactive, toRefs, inject } from "vue";
-import Child2 from "@/components/Child2.vue";
+import { defineComponent, reactive, toRefs, inject } from 'vue'
+import Child2 from '@/components/Child2.vue'
 
 export default defineComponent({
   props: {
@@ -21,8 +21,8 @@ export default defineComponent({
   },
   // eslint-disable-next-line no-unused-vars
   setup(props, { attrs, slots, emit }) {
-    console.warn(props);
-    const state = reactive({});
+    console.warn(props)
+    const state = reactive({})
     // attrs, non-reactive object
     // console.log(attrs);
     // slots, non-reactive object
@@ -30,7 +30,7 @@ export default defineComponent({
     // emit events, method
     // console.log(emit);
 
-    const providedData = inject("location");
+    const providedData = inject('location')
 
     // computed
     /**
@@ -51,9 +51,9 @@ export default defineComponent({
     return {
       ...toRefs(state),
       providedData
-    };
+    }
   }
-});
+})
 </script>
 
 <style lang="scss" scoped></style>

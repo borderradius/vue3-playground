@@ -23,25 +23,21 @@ export default defineComponent({
       lists: []
     });
     const store = useStore();
-    console.warn(store);
 
-    store.dispatch("setLists");
+    store.dispatch("cart/getProducts");
 
     /**
      * * computed
      */
     state.lists = computed(() => {
-      // 2개다 가능.
-      // return store.state.lists;
-      return store.getters["getLists"];
+      return store.getters["cart/cartProducts"];
     });
 
     /**
      * * method
      */
     const changeLists = () => {
-      store.commit("DECREASE_LISTS", [{ name: "haha" }]);
-      // store.commit("DECREASE_LISTS");
+      store.commit("cart/setProductLists", [{ name: "haha" }]);
     };
 
     /**

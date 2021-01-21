@@ -1,66 +1,68 @@
 <template>
-  <div>
-    <h1>about page</h1>
-    <button @click="changeLists">click!</button>
-    <button @click="changeState">state강제변환!</button>
-    <Chat />
-    <ul>
-      <li v-for="list in lists" :key="list.no">
-        {{ list.name }}
-      </li>
-    </ul>
-    <!-- <div id="target">{{ common }}</div> -->
-    <!-- {{ common2 }} -->
-  </div>
+  <div />
 </template>
 
 <script>
-import { computed, defineComponent, reactive, toRefs } from 'vue'
-import { useStore } from 'vuex'
-import Chat from '@/components/chat.vue'
+import {
+  defineComponent,
+  reactive,
+  toRefs,
+  getCurrentInstance
+} from '@/vue-wrapper'
 
 export default defineComponent({
-  components: {
-    Chat
-  },
-  setup(prop, { attribute, slots, emit }) {
+  // eslint-disable-next-line no-unused-vars
+  setup(prop, { attrs, slots, emit }) {
+    console.log('[LIFECYCLE] beforeCreate, created')
     const state = reactive({
-      lists: []
+      prop1: 1,
+      prop2: 2
     })
-    const store = useStore()
-
-    store.dispatch('cart/getProducts')
-
-    /**
-     * * computed
-     */
-    state.lists = computed(() => {
-      return store.getters['cart/cartProducts']
-    })
+    // getCurrentInstance only works during setup or Lifecycle Hooks
+    const currentInstance = getCurrentInstance()
+    currentInstance.appContext.config.globalProperties // access to globalProperties
 
     /**
-     * * method
-     */
-    const changeLists = () => {
-      store.commit('cart/setProducts', [{ name: 'haha' }])
-    }
-
-    const changeState = () => {
-      store.state.cart.items = 111
-    }
-
-    /**
-     * * watch
+     * * computed----------------------------------------
      */
 
     /**
-     * * life cycle
+     * * life cycle----------------------------------------
+     */
+    // onBeforeMount(() => {
+    //   console.log("[LIFECYCLE] beforeMount");
+    // });
+
+    // onMounted(() => {
+    //   console.log("[LIFECYCLE] mounted");
+    // });
+
+    // onBeforeUpdate(() => {
+    //   console.log("[LIFECYCLE] beforeUpdate");
+    // });
+
+    // onUpdated(() => {
+    //   console.log("[LIFECYCLE] updated");
+    // });
+
+    // onBeforeUnmount(() => {
+    //   console.log("[LIFECYCLE] beforeDestroy");
+    // });
+
+    // onUnmounted(() => {
+    //   console.log("[LIFECYCLE] destroyed");
+    // });
+
+    /**
+     * * method----------------------------------------
+     */
+
+    /**
+     * * watch----------------------------------------
      */
 
     return {
-      ...toRefs(state),
-      changeLists,
-      changeState
+      ...toRefs(state)
     }
   }
 })

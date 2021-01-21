@@ -10,7 +10,8 @@ const state = () => {
 }
 
 const getters = {
-  cartProducts: state => {
+  // eslint-disable-next-line no-shadow
+  cartProducts(state, getters, rootState) {
     return state.items
   }
 }
@@ -18,11 +19,11 @@ const getters = {
 const actions = {
   async getProducts({ commit, rootState }) {
     const products = await shop.getProducts()
-    commit('setProductLists', products)
+    commit('setProducts', products)
   }
 }
 const mutations = {
-  setProductLists(state, products = []) {
+  setProducts(state, products = []) {
     state.items = products
   }
 }

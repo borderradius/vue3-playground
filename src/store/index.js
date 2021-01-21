@@ -5,7 +5,7 @@ export default createStore({
   modules: {
     cart
   },
-  strict: 'debug',
+  strict: process.env.NODE_ENV !== 'production',
   plugins: [createLogger()],
   state() {
     return {

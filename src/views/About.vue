@@ -2,6 +2,8 @@
   <div>
     <h1>about page</h1>
     <button @click="changeLists">click!</button>
+    <button @click="changeState">state강제변환!</button>
+    <Chat />
     <ul>
       <li v-for="list in lists" :key="list.no">
         {{ list.name }}
@@ -15,9 +17,12 @@
 <script>
 import { computed, defineComponent, reactive, toRefs } from 'vue'
 import { useStore } from 'vuex'
+import Chat from '@/components/chat.vue'
 
 export default defineComponent({
-  // eslint-disable-next-line no-unused-vars
+  components: {
+    Chat
+  },
   setup(prop, { attribute, slots, emit }) {
     const state = reactive({
       lists: []
@@ -37,7 +42,11 @@ export default defineComponent({
      * * method
      */
     const changeLists = () => {
-      store.commit('cart/setProductLists', [{ name: 'haha' }])
+      store.commit('cart/setProducts', [{ name: 'haha' }])
+    }
+
+    const changeState = () => {
+      store.state.cart.items = 111
     }
 
     /**
@@ -50,7 +59,8 @@ export default defineComponent({
 
     return {
       ...toRefs(state),
-      changeLists
+      changeLists,
+      changeState
     }
   }
 })
